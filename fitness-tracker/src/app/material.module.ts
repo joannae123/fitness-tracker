@@ -8,6 +8,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
     imports: [
@@ -19,7 +21,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
       MatNativeDateModule,
       MatCheckboxModule,
       MatToolbarModule,
-      MatSidenavModule
+      MatSidenavModule,
+      MatIconModule,
+      MatListModule
     ],
     exports: [
       BrowserAnimationsModule,
@@ -30,7 +34,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
       MatNativeDateModule,
       MatCheckboxModule,
       MatToolbarModule,
-      MatSidenavModule
+      MatSidenavModule,
+      MatIconModule,
+      MatListModule
     ]
   })
 
