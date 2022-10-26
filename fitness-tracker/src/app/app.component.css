@@ -5,22 +5,3 @@ height: 100%;
 mat-sidenav{
     width: 250px;
 }
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-a:hover, a:active{
-    color: lightgray;
-}
-
-.nav-items{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-caption{
-    padding: 5px;
-}
