@@ -1,1 +1,23 @@
-<p>new-training works!</p>
+<section class="new-training" fxLayout fxLayoutAlign="center" >
+    <mat-card fxFlex="400px">
+        <mat-card-title>Time to start training</mat-card-title>
+        <mat-card-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Select type of training</mat-label>
+                <mat-select>
+                  <mat-option value="crunches">
+                    Crunches
+                  </mat-option>
+                  <mat-option value="other">
+                    Other
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button type="submit">
+                Start
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</section>

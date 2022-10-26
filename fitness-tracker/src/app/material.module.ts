@@ -10,6 +10,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
     imports: [
@@ -23,7 +26,10 @@ import {MatListModule} from '@angular/material/list';
       MatToolbarModule,
       MatSidenavModule,
       MatIconModule,
-      MatListModule
+      MatListModule,
+      MatTabsModule,
+      MatCardModule,
+      MatSelectModule
     ],
     exports: [
       BrowserAnimationsModule,
@@ -36,7 +42,10 @@ import {MatListModule} from '@angular/material/list';
       MatToolbarModule,
       MatSidenavModule,
       MatIconModule,
-      MatListModule
+      MatListModule,
+      MatTabsModule,
+      MatCardModule,
+      MatSelectModule
     ]
   })
 
