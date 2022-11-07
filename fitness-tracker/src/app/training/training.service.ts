@@ -10,11 +10,10 @@ export class TrainingService {
 
   exerciseChanged = new Subject<Exercise | null>();
   exercisesChanged = new Subject<Exercise[]>();
+  finishedExercisesChanged = new Subject<Exercise[]>();
 
   private availableExercises: Exercise[] = [];
-
   private runningExercise!: Exercise | null;
-  exercises: Exercise[] = [];
 
   constructor(private db: AngularFirestore) { }
 
@@ -42,6 +41,7 @@ export class TrainingService {
   }
 
   startExcercise(selectedId: string){
+    this.db.doc('availableExercises/' + selectedId).update({lastSelected: new Date()});
     this.runningExercise = this.availableExercises.find(ex => ex.id === selectedId)!;
     this.exerciseChanged.next({...this.runningExercise});
   }
@@ -67,10 +67,15 @@ export class TrainingService {
   }
 
   getAllExercises(){
-    return this.exercises;
+    this.db
+    .collection<Exercise>('finishedExercises')
+    .valueChanges()      
+    .subscribe((exercises: Exercise[]) => {
+      this.finishedExercisesChanged.next(exercises);
+    });
   }
 
   private addDataToDb(exercise: Exercise){
-    this.db.collection('finishedExercises').add(exercise);
+    this.db.collection<Exercise>('finishedExercises').add(exercise);
   }
 }
