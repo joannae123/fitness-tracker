@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { TrainingService } from "../training/training.service";
 
 @Injectable({
   providedIn: 'root',
@@ -11,18 +12,28 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 export class AuthService {
     authChange = new Subject<boolean>();
-    private user: User = {
-        email: null,
-        userId: null
-    };
+    
+    private isAuthenticated = false;
 
-    constructor(private router: Router, private afAuth: AngularFireAuth) { }
+    constructor(private router: Router, private afAuth: AngularFireAuth, private trainingService: TrainingService) { }
+
+    initAuthListener(){
+        this.afAuth.authState.subscribe(user => {
+            if(user){
+                this.isAuthenticated = true;
+                this.authChange.next(true);
+                this.router.navigate(['/training']);
+            }
+            else{
+                this.trainingService.cancelSubscriptions();
+                this.authChange.next(false);
+                this.router.navigate(['/login']);
+                this.isAuthenticated = false;
+            }
+        })
+    }
 
     registerUser(authData: AuthData){
-/*         this.user = {
-            email: authData.email,
-            userId: Math.round(Math.random() * 10000).toString()
-        } */
         this.afAuth.createUserWithEmailAndPassword(authData.email, authData.password)
         .then(result => {
             console.log(result)
@@ -30,14 +41,9 @@ export class AuthService {
         .catch(error => {
             console.log(error)
         })
-        this.authSuccessfully();
     };
 
     login(authData: AuthData){
-/*         this.user = {
-            email: authData.email,
-            userId: Math.round(Math.random() * 10000).toString()
-        } */
         this.afAuth.signInWithEmailAndPassword(authData.email, authData.password)
         .then(result => {
             console.log(result)
@@ -45,28 +51,13 @@ export class AuthService {
         .catch(error => {
             console.log(error)
         });
-        this.authSuccessfully();
     };
 
     logout(){
-        this.user = {
-            email: null,
-            userId: null
-        }
-        this.authChange.next(false);
-        this.router.navigate(['/login']);
-    }
-
-    getUser(){
-        return {...this.user};
+        this.afAuth.signOut();
     }
 
     isAuth(){
-        return this.user.userId != null;
-    }
-
-    authSuccessfully(){
-        this.authChange.next(true);
-        this.router.navigate(['/training']);
+        return this.isAuthenticated;
     }
 }
