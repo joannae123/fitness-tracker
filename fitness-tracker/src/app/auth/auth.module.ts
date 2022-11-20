@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { SharedModule } from '../shared/shared.module';
+import { AuthRoutingModule } from './auth-routing.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     provideAuth(() => getAuth()),
     AngularFireAuthModule,
-    SharedModule
+    SharedModule,
+    AuthRoutingModule
   ],
   providers: [],
   bootstrap: [],

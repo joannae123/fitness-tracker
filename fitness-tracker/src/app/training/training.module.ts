@@ -7,6 +7,7 @@ import { StopTrainingComponent } from './current-training/stop-training.componen
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
+import { TrainingRoutingModule } from './training-routing.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
-    SharedModule
+    SharedModule,
+    TrainingRoutingModule
   ],
   providers: [],
   bootstrap: [],
